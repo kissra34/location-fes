@@ -1,108 +1,161 @@
-/* ==========================
- ملف CSS كامل لموقع لوكاجيون فاس
- ========================== */
+// ==========================
+// ملف script.js كامل لموقع لوكاجيون فاس
+// ==========================
 
-/* الخطوط الأساسية وترتيب العناصر */
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+// ===== Animation للترحيب: إخفاء الرسالة بعد 3 ثوانٍ =====
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        const welcome = document.getElementById('welcomeAnimation');
+        if (welcome) {
+            welcome.style.animation = 'fadeOut 1s ease-in-out';
+            setTimeout(() => {
+                welcome.style.display = 'none';
+            }, 1000);
+        }
+    }, 3000);
+});
 
-/* ======= الترحيب ======= */
-.welcome-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.95);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    animation: fadeIn 1s ease-in-out;
-}
-.welcome-content {
-    text-align: center;
-    color: #dc3545;
-    animation: slideUp 1s ease-in-out 0.5s both;
-}
-.welcome-content h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-}
-.welcome-content p {
-    font-size: 1.2rem;
-    margin-top: 10px;
+// ===== نموذج الحجز =====
+const bookingForm = document.getElementById('bookingForm');
+if (bookingForm) {
+    bookingForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const carType = document.getElementById('carType').value;
+        const days = document.getElementById('days').value;
+
+        if (name && email && carType && days) {
+            document.getElementById('confirmation').classList.remove('d-none');
+            console.log(`حجز: ${name}, ${email}, ${carType}, ${days} أيام`);
+            bookingForm.reset();
+        }
+    });
 }
 
-/* ======= أنيميشن الترحيب ======= */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-@keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+// ===== المنتجات مباشرة من الكود (بدون Supabase) =====
+const products = [
+    { id: 1, name: "سيارة رياضية", description: "سرعة وأداء عالي", price: "$200/يوم" },
+    { id: 2, name: "سيارة عائلية", description: "مريحة للعائلات", price: "$150/يوم" },
+    { id: 3, name: "سيارة اقتصادية", description: "توفير في الوقود", price: "$100/يوم" },
+    { id: 4, name: "سيارة SUV", description: "مناسبة للطرق الوعرة", price: "$180/يوم" }
+];
+
+// ===== عرض المنتجات في HTML =====
+function displayProducts(list) {
+    const container = document.getElementById('products');
+    if (!container) return;
+    container.innerHTML = '';
+
+    list.forEach(p => {
+        const div = document.createElement('div');
+        div.classList.add('product-item', 'mb-3', 'p-3', 'border', 'rounded');
+        div.innerHTML = `
+            <h3>${p.name}</h3>
+            <p>${p.description}</p>
+            <strong>${p.price}</strong>
+        `;
+        container.appendChild(div);
+    });
 }
 
-/* ======= الهيرو ======= */
-.hero {
-    background: linear-gradient(135deg, #ffffff 0%, #ffcccc 100%);
-    color: #dc3545;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+// ===== البحث عن المنتجات =====
+const searchInput = document.createElement('input');
+searchInput.type = 'text';
+searchInput.placeholder = 'ابحث عن منتج...';
+searchInput.classList.add('form-control', 'mb-3');
+const productsSection = document.getElementById('cars');
+if (productsSection) {
+    productsSection.prepend(searchInput);
 }
 
-/* ======= الكاروسيل ======= */
-.carousel-item img {
-    height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+searchInput.addEventListener('input', function() {
+    const query = searchInput.value.toLowerCase();
+    const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+    displayProducts(filtered);
+});
+
+// ===== عند تحميل الصفحة =====
+document.addEventListener('DOMContentLoaded', function() {
+    displayProducts(products);
+});// ==========================
+// ملف script.js كامل لموقع لوكاجيون فاس
+// ==========================
+
+// ===== Animation للترحيب: إخفاء الرسالة بعد 3 ثوانٍ =====
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        const welcome = document.getElementById('welcomeAnimation');
+        if (welcome) {
+            welcome.style.animation = 'fadeOut 1s ease-in-out';
+            setTimeout(() => {
+                welcome.style.display = 'none';
+            }, 1000);
+        }
+    }, 3000);
+});
+
+// ===== نموذج الحجز =====
+const bookingForm = document.getElementById('bookingForm');
+if (bookingForm) {
+    bookingForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const carType = document.getElementById('carType').value;
+        const days = document.getElementById('days').value;
+
+        if (name && email && carType && days) {
+            document.getElementById('confirmation').classList.remove('d-none');
+            console.log(`حجز: ${name}, ${email}, ${carType}, ${days} أيام`);
+            bookingForm.reset();
+        }
+    });
 }
 
-/* ======= Navbar ======= */
-.navbar-brand {
-    font-weight: bold;
-    color: #ffffff !important;
+// ===== المنتجات مباشرة من الكود (بدون Supabase) =====
+const products = [
+    { id: 1, name: "سيارة رياضية", description: "سرعة وأداء عالي", price: "$200/يوم" },
+    { id: 2, name: "سيارة عائلية", description: "مريحة للعائلات", price: "$150/يوم" },
+    { id: 3, name: "سيارة اقتصادية", description: "توفير في الوقود", price: "$100/يوم" },
+    { id: 4, name: "سيارة SUV", description: "مناسبة للطرق الوعرة", price: "$180/يوم" }
+];
+
+// ===== عرض المنتجات في HTML =====
+function displayProducts(list) {
+    const container = document.getElementById('products');
+    if (!container) return;
+    container.innerHTML = '';
+
+    list.forEach(p => {
+        const div = document.createElement('div');
+        div.classList.add('product-item', 'mb-3', 'p-3', 'border', 'rounded');
+        div.innerHTML = `
+            <h3>${p.name}</h3>
+            <p>${p.description}</p>
+            <strong>${p.price}</strong>
+        `;
+        container.appendChild(div);
+    });
 }
 
-/* ======= الأزرار ======= */
-.btn-danger {
-    background: linear-gradient(135deg, #dc3545 0%, #b02a37 100%);
-    border: none;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-.btn-danger:hover {
-    background: linear-gradient(135deg, #b02a37 0%, #dc3545 100%);
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
+// ===== البحث عن المنتجات =====
+const searchInput = document.createElement('input');
+searchInput.type = 'text';
+searchInput.placeholder = 'ابحث عن منتج...';
+searchInput.classList.add('form-control', 'mb-3');
+const productsSection = document.getElementById('cars');
+if (productsSection) {
+    productsSection.prepend(searchInput);
 }
 
-/* ======= الأقسام ======= */
-.section {
-    padding: 60px 0;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-}
+searchInput.addEventListener('input', function() {
+    const query = searchInput.value.toLowerCase();
+    const filtered = products.filter(p => p.name.toLowerCase().includes(query));
+    displayProducts(filtered);
+});
 
-/* ======= نصوص مهمة ======= */
-.text-danger {
-    color: #dc3545 !important;
-}
-
-/* ======= نموذج الحجز ======= */
-form#bookingForm input,
-form#bookingForm select {
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    padding: 10px;
-}
-
-#confirmation {
-    text-align: center;
-    font-weight: bold;
-}
+// ===== عند تحميل الصفحة =====
+document.addEventListener('DOMContentLoaded', function() {
+    displayProducts(products);
+});
