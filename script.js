@@ -34,9 +34,10 @@ style.innerHTML = `
 }
 `;
 document.head.appendChild(style);
+
 // ===== Supabase: جلب المنتجات =====
-const SUPABASE_URL = "ضع_Project_URL_هنا";
-const SUPABASE_ANON_KEY = "ضع_anon_key_هنا";
+const SUPABASE_URL = "https://glpxbnpmooufywgphcvd.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_9OxZkH66PdDF0SFfFOS1nQ_xq5yLb1R";
 
 async function loadProducts() {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*`, {
