@@ -26,3 +26,10 @@ animation: fadeIn 1s ease-in-out;
   from { transform: translateY(50px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+.section {
+  padding: 60px 0;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+.text-danger {
+  color: #dc3545 !important;
+}
