@@ -34,3 +34,35 @@ style.innerHTML = `
 }
 `;
 document.head.appendChild(style);
+// ===== Supabase: جلب المنتجات =====
+const SUPABASE_URL = "ضع_Project_URL_هنا";
+const SUPABASE_ANON_KEY = "ضع_anon_key_هنا";
+
+async function loadProducts() {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*`, {
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+    },
+  });
+
+  const products = await res.json();
+
+  const container = document.getElementById("products");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  products.forEach(p => {
+    const div = document.createElement("div");
+    div.innerHTML = `
+      <h3>${p.name}</h3>
+      <p>${p.description || ""}</p>
+      <strong>${p.price}</strong>
+      <hr/>
+    `;
+    container.appendChild(div);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", loadProducts);
