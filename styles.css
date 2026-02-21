@@ -1,8 +1,4 @@
-// ==========================
-// ملف script.js كامل لموقع لوكاجيون فاس
-// ==========================
-
-// ===== Animation للترحيب: إخفاء الرسالة بعد 3 ثوانٍ =====
+// ===== Animation للترحيب =====
 window.addEventListener('load', function() {
     setTimeout(function() {
         const welcome = document.getElementById('welcomeAnimation');
@@ -33,7 +29,7 @@ if (bookingForm) {
     });
 }
 
-// ===== المنتجات مباشرة من الكود (بدون Supabase) =====
+// ===== المنتجات مباشرة من الكود =====
 const products = [
     { id: 1, name: "سيارة رياضية", description: "سرعة وأداء عالي", price: "$200/يوم", image: "https://via.placeholder.com/400x200?text=سيارة+رياضية" },
     { id: 2, name: "سيارة عائلية", description: "مريحة للعائلات", price: "$150/يوم", image: "https://via.placeholder.com/400x200?text=سيارة+عائلية" },
@@ -47,7 +43,6 @@ function displayProducts(list) {
     const container = document.getElementById('products');
     if (!container) return;
     container.innerHTML = '';
-
     list.forEach(p => {
         const div = document.createElement('div');
         div.classList.add('product-item', 'mb-3', 'p-3', 'border', 'rounded');
