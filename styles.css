@@ -1,6 +1,6 @@
 /* ==========================
-   ملف CSS كامل لموقع لوكاجيون فاس
-   ========================== */
+ ملف CSS كامل لموقع لوكاجيون فاس
+ ========================== */
 
 /* الخطوط الأساسية وترتيب العناصر */
 body {
@@ -83,13 +83,26 @@ body {
     transition: all 0.3s ease;
 }
 
-/* ======= الأقسام Sections ======= */
+/* ======= الأقسام ======= */
 .section {
     padding: 60px 0;
     box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
 }
 
-/* ======= نصوص بلون أحمر ======= */
+/* ======= نصوص مهمة ======= */
 .text-danger {
     color: #dc3545 !important;
+}
+
+/* ======= نموذج الحجز ======= */
+form#bookingForm input,
+form#bookingForm select {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+#confirmation {
+    text-align: center;
+    font-weight: bold;
 }
