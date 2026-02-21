@@ -1,78 +1,92 @@
-// ===== Animation للترحيب =====
+// ===== Animation الترحيب =====
 window.addEventListener('load', function() {
-    setTimeout(function() {
-        const welcome = document.getElementById('welcomeAnimation');
-        if (welcome) {
-            welcome.style.animation = 'fadeOut 1s ease-in-out';
-            setTimeout(() => {
-                welcome.style.display = 'none';
-            }, 1000);
-        }
-    }, 3000);
+setTimeout(function() {
+const welcome = document.getElementById('welcomeAnimation');
+if (welcome) {
+welcome.style.animation = 'fadeOut 1s ease-in-out';
+setTimeout(() => { welcome.style.display = 'none'; }, 1000);
+}
+}, 3000);
 });
 
 // ===== نموذج الحجز =====
 const bookingForm = document.getElementById('bookingForm');
 if (bookingForm) {
-    bookingForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const carType = document.getElementById('carType').value;
-        const days = document.getElementById('days').value;
-
-        if (name && email && carType && days) {
-            document.getElementById('confirmation').classList.remove('d-none');
-            console.log(`حجز: ${name}, ${email}, ${carType}, ${days} أيام`);
-            bookingForm.reset();
-        }
-    });
+bookingForm.addEventListener('submit', function(event) {
+event.preventDefault();
+const name = document.getElementById('name').value;
+const email = document.getElementById('email').value;
+const carType = document.getElementById('carType').value;
+const days = document.getElementById('days').value;
+if (name && email && carType && days) {
+document.getElementById('confirmation').classList.remove('d-none');
+console.log(`حجز: ${name}, ${email}, ${carType}, ${days} أيام`);
+bookingForm.reset();
+}
+});
 }
 
-// ===== المنتجات مباشرة من الكود =====
+// ===== المنتجات (سيارات) =====
 const products = [
-    { id: 1, name: "سيارة رياضية", description: "سرعة وأداء عالي", price: "$200/يوم", image: "https://via.placeholder.com/400x200?text=سيارة+رياضية" },
-    { id: 2, name: "سيارة عائلية", description: "مريحة للعائلات", price: "$150/يوم", image: "https://via.placeholder.com/400x200?text=سيارة+عائلية" },
-    { id: 3, name: "سيارة اقتصادية", description: "توفير في الوقود", price: "$100/يوم", image: "https://via.placeholder.com/400x200?text=سيارة+اقتصادية" },
-    { id: 4, name: "سيارة SUV", description: "مناسبة للطرق الوعرة", price: "$180/يوم", image: "https://via.placeholder.com/400x200?text=سيارة+SUV" },
-    { id: 5, name: "سيارة جديدة", description: "وصف السيارة الجديدة هنا", price: "$220/يوم", image: "https://via.placeholder.com/400x200?text=سيارة+جديدة" }
+{ id:1, name:"سيارة رياضية", description:"سرعة وأداء عالي", price:"$200/يوم", image:"https://via.placeholder.com/400x200?text=سيارة+رياضية" },
+{ id:2, name:"سيارة عائلية", description:"مريحة للعائلات", price:"$150/يوم", image:"https://via.placeholder.com/400x200?text=سيارة+عائلية" },
+{ id:3, name:"سيارة اقتصادية", description:"توفير في الوقود", price:"$100/يوم", image:"https://via.placeholder.com/400x200?text=سيارة+اقتصادية" }
 ];
 
-// ===== عرض المنتجات في HTML مع الصورة =====
-function displayProducts(list) {
-    const container = document.getElementById('products');
-    if (!container) return;
-    container.innerHTML = '';
-    list.forEach(p => {
-        const div = document.createElement('div');
-        div.classList.add('product-item', 'mb-3', 'p-3', 'border', 'rounded');
-        div.innerHTML = `
-            <img src="${p.image}" alt="${p.name}" class="img-fluid mb-2" style="border-radius:8px; height:200px; object-fit:cover;">
-            <h3>${p.name}</h3>
-            <p>${p.description}</p>
-            <strong>${p.price}</strong>
-        `;
-        container.appendChild(div);
-    });
+// ===== المنتجات (دراجات نارية) =====
+const motorbikes = [
+{ id:1, name:"دراجة سباق", description:"سرعة وأداء عالي", price:"$120/يوم", image:"https://via.placeholder.com/400x200?text=دراجة+سباق" },
+{ id:2, name:"دراجة سياحية", description:"مريحة للمسافات الطويلة", price:"$90/يوم", image:"https://via.placeholder.com/400x200?text=دراجة+سياحية" }
+];
+
+// ===== عرض المنتجات في HTML =====
+function displayProducts(list, containerId) {
+const container = document.getElementById(containerId);
+if (!container) return;
+container.innerHTML = '';
+list.forEach(p => {
+const div = document.createElement('div');
+div.classList.add('product-item','mb-3','p-3','border','rounded');
+div.innerHTML = `
+<img src="${p.image}" alt="${p.name}" class="img-fluid mb-2" style="border-radius:8px; height:200px; object-fit:cover;">
+<h3>${p.name}</h3>
+<p>${p.description}</p>
+<strong>${p.price}</strong>
+`;
+container.appendChild(div);
+});
 }
 
-// ===== البحث عن المنتجات =====
-const searchInput = document.createElement('input');
-searchInput.type = 'text';
-searchInput.placeholder = 'ابحث عن منتج...';
-searchInput.classList.add('form-control', 'mb-3');
-const productsSection = document.getElementById('cars');
-if (productsSection) {
-    productsSection.prepend(searchInput);
-}
+// ===== البحث عن السيارات =====
+const searchInputCars = document.createElement('input');
+searchInputCars.type='text';
+searchInputCars.placeholder='ابحث عن سيارة...';
+searchInputCars.classList.add('form-control','mb-3');
+const carsSection = document.getElementById('cars');
+if(carsSection){ carsSection.prepend(searchInputCars); }
 
-searchInput.addEventListener('input', function() {
-    const query = searchInput.value.toLowerCase();
-    const filtered = products.filter(p => p.name.toLowerCase().includes(query));
-    displayProducts(filtered);
+searchInputCars.addEventListener('input', function(){
+const query = searchInputCars.value.toLowerCase();
+const filtered = products.filter(p=>p.name.toLowerCase().includes(query));
+displayProducts(filtered,'products');
+});
+
+// ===== البحث عن الدراجات النارية =====
+const searchInputBikes = document.createElement('input');
+searchInputBikes.type='text';
+searchInputBikes.placeholder='ابحث عن دراجة...';
+searchInputBikes.classList.add('form-control','mb-3');
+const bikesSection = document.getElementById('motorbikes');
+if(bikesSection){ bikesSection.prepend(searchInputBikes); }
+
+searchInputBikes.addEventListener('input', function(){
+const query = searchInputBikes.value.toLowerCase();
+const filtered = motorbikes.filter(p=>p.name.toLowerCase().includes(query));
+displayProducts(filtered,'motorbikeProducts');
 });
 
 // ===== عند تحميل الصفحة =====
-document.addEventListener('DOMContentLoaded', function() {
-    displayProducts(products);
+document.addEventListener('DOMContentLoaded', function(){
+displayProducts(products,'products');
+displayProducts(motorbikes,'motorbikeProducts');
 });
